@@ -62,6 +62,7 @@ def create_report(dict):
     gifter_list = list(gifter_dict.items())
     for gifter in gifter_list:
         print gifter
+    send_or_report()
 
 if __name__ == "__main__":
     send_or_report()
