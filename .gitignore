@@ -1,0 +1,7 @@
+/.cache
+/.tox/
+/__pycache__/
+/gifter.pyc
+/gifter/lib/*
+/gifter/bin/*
+/gifter/python
