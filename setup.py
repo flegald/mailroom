@@ -11,6 +11,6 @@ setup(
   license="MIT",
   py_modules=["gifter"],
   package_dir={'': 'src'},
-  install_requires=[],
+  install_requires=['future', 'builtins'],
   extras_require={'test': ['pytest', 'pytest-xdist', "tox"]},
   )

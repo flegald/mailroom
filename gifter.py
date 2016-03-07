@@ -1,6 +1,8 @@
 # -*- coding:UTF-8 -*-
 
 import sys
+import future
+from builtins import input
 GIFTER_DICT = {}
 
 email_text = "Dear {}, \n Thank you so much for your donation of ${}. You are one cool cat \n"
@@ -18,7 +20,7 @@ def validator(answer):
         send_or_report()
 
 def send_or_report():
-    user_answer = raw_input("Would you like to 'Send a Thank You' or 'Create a Report'? (press 'q' at anytime to quit) \n >>>")
+    user_answer = input("Would you like to 'Send a Thank You' or 'Create a Report'? (press 'q' at anytime to quit) \n >>>")
     if validator(user_answer):
         ask_name()
     elif validator(user_answer) == False:
@@ -27,7 +29,7 @@ def send_or_report():
     
 
 def ask_name():
-    name_givenT = raw_input("Type gifter name or 'list' to see a list of gifters. \n >>>")
+    name_givenT = input("Type gifter name or 'list' to see a list of gifters. \n >>>")
     if name_givenT.lower() == "list":
         print list(GIFTER_DICT)
         ask_name()
@@ -38,7 +40,7 @@ def ask_name():
 
 def ask_ammt(name):
     update_name = name
-    ammt_givenT = raw_input("How much is the donation? \n >>>")
+    ammt_givenT = input("How much is the donation? \n >>>")
     if ammt_givenT.lower() == 'q':
         sys.exit()
     elif ammt_givenT.isdigit() == False:
