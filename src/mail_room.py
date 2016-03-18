@@ -1,6 +1,7 @@
 #  _*_ coding:utf-8 _*_
 """A simple python program to keep track of names and donations."""
 from __future__ import print_function
+from builtins import input
 import sys
 import io
 
@@ -13,32 +14,27 @@ email_text = "Dear {},\nThank you so much for you donation of ${}. You are a goo
 
 def main_controller():
     """Control flow of program."""
-    begin = send_or_report()
-    if begin is True:
-        name = get_name()
-        check_dict(name, GIFTER_DICT)
-        ammt = get_ammt()
-        update_dict(name, ammt)
-        send_email(name, ammt)
-        main_controller()
-    elif begin is False:
-        to_print = create_report()
-        if to_print is False:
-            main_controller()
-        else:
-            print_report(to_print)
-            write_to_file(to_print)
-            main_controller()
+    while True:
+        begin = send_or_report()
+        if begin is True:
+            name = get_name()
+            check_dict(name, GIFTER_DICT)
+            ammt = get_ammt()
+            update_dict(name, ammt)
+            send_email(name, ammt)
+        elif begin is False:
+            to_print = create_report()
+            if to_print is False:
+                main_controller()
+            else:
+                print_report(to_print)
+                write_to_file(to_print)
 
 
 def prompt_usr(prompt):
     """Return the user response to a prompt."""
-    try:
-        input = raw_input
-    except NameError:
-        pass
     usr_answer = input('{} \n>>>>>> '.format(prompt))
-    return usr_answer.lower()
+    return usr_answer
 
 
 def validator(usr_response):
@@ -72,13 +68,10 @@ def get_name():
     while True:
         usr_response = prompt_usr(prompts[1])
         usr_response = usr_response.lower()
-        if usr_response == "q":
-            sys.exit()
-        elif usr_response == "l":
-            name_list = create_list(GIFTER_DICT)
-            print(name_list)
-        else:
-            break
+    elif usr_response == 'q':
+        sys.exit()
+    elif usr_response == 'l'
+        
     return usr_response
 
 
@@ -121,7 +114,7 @@ def send_email(name, ammt):
 
 
 def create_list(donate_dict):
-    """Create a list of names that have given before."""
+    """Create a list of names that have donated before."""
     if len(donate_dict) > 0:
         name_list = list(donate_dict.keys())
         return name_list
@@ -158,9 +151,15 @@ def write_to_file(to_write):
     open_file = io.open("donate_track.txt", 'w')
     open_file.truncate()
     for i in to_write:
-        open_file.write(i.decode('utf-8'))
-        open_file.write("\n".decode('utf-8'))
-    open_file.close()
+        try:
+            open_file.write(i)
+            open_file.write("\n")
+            open_file.close()
+        except TypeError:
+            open_file.write(i.decode('utf-8'))
+            open_file.write("\n".decode('utf-8'))
+            open_file.close()
+
 
 if __name__ == "__main__":
     main_controller()

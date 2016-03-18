@@ -1,3 +1,1 @@
-Total:$9 Name: fuck Number of Times: 1 Average:$9
-Total:$2 Name: alison Number of Times: 1 Average:$2
-Total:$4 Name: david Number of Times: 1 Average:$4
+Total:$90 Name: grapes Number of Times: 1 Average:$90.0
