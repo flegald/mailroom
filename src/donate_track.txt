@@ -1,1 +1,2 @@
-Total:$90 Name: grapes Number of Times: 1 Average:$90.0
+Total:$100 Name: david Number of Times: 1 Average:$100.0
+Total:$300 Name: alison Number of Times: 1 Average:$300.0

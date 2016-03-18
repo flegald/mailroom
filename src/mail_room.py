@@ -52,15 +52,15 @@ def validator(usr_response):
 
 def send_or_report():
     """Send a thank you or create a report."""
-    usr_response = prompt_usr(prompts[0])
-    validate = validator(usr_response)
-    if validate is True:
-        return True
-    elif validate is False:
-        return False
-    elif validate == "error":
-        print("Please choose a valid option")
-        send_or_report()
+    while True:
+        usr_response = prompt_usr(prompts[0])
+        validate = validator(usr_response)
+        if validate is True:
+            return True
+        elif validate is False:
+            return False
+        else:
+            print("Please choose a valid option")
 
 
 def get_name():
@@ -68,11 +68,12 @@ def get_name():
     while True:
         usr_response = prompt_usr(prompts[1])
         usr_response = usr_response.lower()
-    elif usr_response == 'q':
-        sys.exit()
-    elif usr_response == 'l'
-        
-    return usr_response
+        if usr_response == 'q':
+            sys.exit()
+        elif usr_response == 'l':
+            create_list(GIFTER_DICT)
+        else:
+            return usr_response
 
 
 def check_dict(name, donate_dict):
@@ -154,11 +155,10 @@ def write_to_file(to_write):
         try:
             open_file.write(i)
             open_file.write("\n")
-            open_file.close()
         except TypeError:
             open_file.write(i.decode('utf-8'))
             open_file.write("\n".decode('utf-8'))
-            open_file.close()
+    open_file.close()
 
 
 if __name__ == "__main__":
