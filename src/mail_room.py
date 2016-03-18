@@ -1,5 +1,6 @@
 #  _*_ coding:utf-8 _*_
 """A simple python program to keep track of names and donations."""
+from __future__ import print_function
 import sys
 import io
 
@@ -68,18 +69,17 @@ def send_or_report():
 
 def get_name():
     """Get gifter name from user."""
-    usr_response = prompt_usr(prompts[1])
-    usr_response = usr_response.lower()
-    if usr_response == "q":
-        sys.exit()
-    elif usr_response == "l":
-        name_list = create_list(GIFTER_DICT)
-        print name_list
+    while True:
         usr_response = prompt_usr(prompts[1])
         usr_response = usr_response.lower()
-        return usr_response
-    else:
-        return usr_response
+        if usr_response == "q":
+            sys.exit()
+        elif usr_response == "l":
+            name_list = create_list(GIFTER_DICT)
+            print(name_list)
+        else:
+            break
+    return usr_response
 
 
 def check_dict(name, donate_dict):
@@ -116,7 +116,7 @@ def update_dict(name, ammt):
 
 def send_email(name, ammt):
     """Print out customized email text."""
-    print email_text.format(name, ammt)
+    print(email_text.format(name, ammt))
     return email_text.format(name, ammt)
 
 
@@ -127,7 +127,6 @@ def create_list(donate_dict):
         return name_list
     else:
         print("There are no names")
-        return False
 
 
 def create_report():
@@ -147,20 +146,18 @@ def create_report():
         return gifter_list
 
 
-def print_report(list):
+def print_report(doner_list):
     """Sort and print list."""
-    sorted(list, reverse=True)
-    for i in list:
-        print i
+    sorted(doner_list, reverse=True)
+    for i in doner_list:
+        print(i)
 
 
 def write_to_file(to_write):
     """Write list to readable txt file."""
-    print("print")
     open_file = io.open("donate_track.txt", 'w')
     open_file.truncate()
     for i in to_write:
-        print("writing: " + i)
         open_file.write(i.decode('utf-8'))
         open_file.write("\n".decode('utf-8'))
     open_file.close()

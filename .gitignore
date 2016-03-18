@@ -5,3 +5,5 @@
 /gifter/lib/*
 /gifter/bin/*
 /gifter/python
+src/Donate_Tracker.egg*
+src/__pycache__/*
