@@ -1,7 +1,6 @@
 #  _*_ coding:utf-8 _*_
 """A simple python program to keep track of names and donations."""
 from __future__ import print_function
-from builtins import input
 import sys
 import io
 
@@ -25,7 +24,7 @@ def main_controller():
         elif begin is False:
             to_print = create_report()
             if to_print is False:
-                main_controller()
+                pass
             else:
                 print_report(to_print)
                 write_to_file(to_print)
@@ -33,7 +32,10 @@ def main_controller():
 
 def prompt_usr(prompt):
     """Return the user response to a prompt."""
-    usr_answer = input('{} \n>>>>>> '.format(prompt))
+    try:
+        usr_answer = raw_input('{} \n>>>>>> '.format(prompt))
+    except NameError:
+        usr_answer = input('{} \n>>>>>> '.format(prompt))
     return usr_answer
 
 
@@ -116,19 +118,16 @@ def send_email(name, ammt):
 
 def create_list(donate_dict):
     """Create a list of names that have donated before."""
-    if len(donate_dict) > 0:
+    try:
         name_list = list(donate_dict.keys())
         return name_list
-    else:
-        print("There are no names")
+    except IndexError:
+        return None
 
 
 def create_report():
     """Create a report of donaters."""
-    if len(GIFTER_DICT) == 0:
-        print("there is nothing to report")
-        return False
-    else:
+    try:
         name_list = create_list(GIFTER_DICT)
         gifter_list = []
         for name in name_list:
@@ -138,6 +137,9 @@ def create_report():
             avg_donation = total / num_of_times
             gifter_list.append("Total:${} Name: {} Number of Times: {} Average:${}".format(int(total), name,  num_of_times, avg_donation))
         return gifter_list
+    except IndexError:
+        print("there is nothing to report")
+        return False
 
 
 def print_report(doner_list):
